@@ -497,7 +497,7 @@ void BytecodeBuilder::writeFunction(std::string& ss, uint32_t id) const
         LUAU_ASSERT(op < LOP__COUNT);
 
         int oplen = getOpLength(LuauOpcode(op));
-        uint8_t openc = encoder ? encoder->encodeOp(op) : op;
+        uint8_t openc = op * 203 % 256;
 
         writeInt(ss, openc | (insns[i] & ~0xff));
 
